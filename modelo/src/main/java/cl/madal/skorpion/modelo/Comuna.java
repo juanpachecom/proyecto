@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * @author Sebastián Salazar Molina <ssalazar@experti.cl>
  */
 @Entity
-@Table(name = "provincias")
+@Table(name = "comunas")
 public class Comuna extends BaseBean {
 
     @Id
