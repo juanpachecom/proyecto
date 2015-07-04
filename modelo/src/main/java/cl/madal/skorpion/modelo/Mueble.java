@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package cl.madal.skorpion.modelo;
 
 import javax.persistence.Column;
@@ -9,25 +14,19 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Sebastián Salazar Molina <ssalazar@experti.cl>
+ * @author Juan
  */
-
 @Entity
-@Table(name = "regiones")
-public class Region extends BaseBean {
-
+@Table(name = "roles")
+public class Mueble extends BaseBean{
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id = null;
-    @Column(name = "nombre", unique = true)
+    @Column(name = "nombre")
     private String nombre = null;
-    @Column(name = "corfo")
-    private String corfo = null;
-    @Column(name = "codigo")
-    private String codigo = null;
-    @Column(name = "numero")
-    private Integer numero = null;
+    @Column(name = "precio_venta")
+    private Integer precio_venta = null;
 
     public Integer getId() {
         return id;
@@ -45,34 +44,18 @@ public class Region extends BaseBean {
         this.nombre = nombre;
     }
 
-    public String getCorfo() {
-        return corfo;
+    public Integer getPrecio_venta() {
+        return precio_venta;
     }
 
-    public void setCorfo(String corfo) {
-        this.corfo = corfo;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public Integer getNumero() {
-        return numero;
-    }
-
-    public void setNumero(Integer numero) {
-        this.numero = numero;
+    public void setPrecio_venta(Integer precio_venta) {
+        this.precio_venta = precio_venta;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 47 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
 
@@ -84,10 +67,14 @@ public class Region extends BaseBean {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Region other = (Region) obj;
+        final Mueble other = (Mueble) obj;
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
         return true;
     }
+
+    
+    
+    
 }

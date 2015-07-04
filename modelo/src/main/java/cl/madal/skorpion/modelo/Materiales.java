@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package cl.madal.skorpion.modelo;
 
 import javax.persistence.Column;
@@ -5,29 +10,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
  *
- * @author Sebastián Salazar Molina <ssalazar@experti.cl>
+ * @author Juan
  */
-
 @Entity
-@Table(name = "regiones")
-public class Region extends BaseBean {
-
+@Table(name = "materiales")
+public class Materiales extends BaseBean{
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id = null;
-    @Column(name = "nombre", unique = true)
+    @Column(name = "nombre")
     private String nombre = null;
-    @Column(name = "corfo")
-    private String corfo = null;
-    @Column(name = "codigo")
-    private String codigo = null;
-    @Column(name = "numero")
-    private Integer numero = null;
+    @Column(name = "precio_compra")
+    private Integer precio_compra = null;
+     @Column(name = "cantidad")
+    private Integer cantidad = null;
 
     public Integer getId() {
         return id;
@@ -45,34 +48,26 @@ public class Region extends BaseBean {
         this.nombre = nombre;
     }
 
-    public String getCorfo() {
-        return corfo;
+    public Integer getPrecio_compra() {
+        return precio_compra;
     }
 
-    public void setCorfo(String corfo) {
-        this.corfo = corfo;
+    public void setPrecio_compra(Integer precio_compra) {
+        this.precio_compra = precio_compra;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public Integer getCantidad() {
+        return cantidad;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public Integer getNumero() {
-        return numero;
-    }
-
-    public void setNumero(Integer numero) {
-        this.numero = numero;
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + (this.id != null ? this.id.hashCode() : 0);
+        int hash = 3;
+        hash = 71 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
 
@@ -84,10 +79,14 @@ public class Region extends BaseBean {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Region other = (Region) obj;
+        final Materiales other = (Materiales) obj;
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
         return true;
     }
+     
+     
+     
+    
 }

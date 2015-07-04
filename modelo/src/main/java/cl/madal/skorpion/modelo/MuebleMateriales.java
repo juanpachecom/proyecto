@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package cl.madal.skorpion.modelo;
 
 import javax.persistence.Column;
@@ -9,24 +14,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 /**
  *
- * @author Sebastián Salazar Molina <ssalazar@experti.cl>
+ * @author Juan
  */
 @Entity
-@Table(name = "provincias")
-public class Provincia extends BaseBean {
-
+@Table(name = "mueblemateria")
+public class MuebleMateriales extends BaseBean{
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id = null;
-    @Column(name = "nombre")
-    private String nombre = null;
-    @JoinColumn(name = "region_id", referencedColumnName = "id")
+    @JoinColumn(name = "mueble_id", referencedColumnName = "id")
     @ManyToOne
-    private Region region = null;
+     private Mueble mueble = null;
+     @JoinColumn(name = "materiales_id", referencedColumnName = "id")
+    @ManyToOne
+     private Materiales materiales = null;
+
     public Integer getId() {
         return id;
     }
@@ -35,26 +40,26 @@ public class Provincia extends BaseBean {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Mueble getMueble() {
+        return mueble;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setMueble(Mueble mueble) {
+        this.mueble = mueble;
     }
 
-    public Region getRegion() {
-        return region;
+    public Materiales getMateriales() {
+        return materiales;
     }
 
-    public void setRegion(Region region) {
-        this.region = region;
+    public void setMateriales(Materiales materiales) {
+        this.materiales = materiales;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + (this.id != null ? this.id.hashCode() : 0);
+        int hash = 5;
+        hash = 17 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
 
@@ -66,10 +71,16 @@ public class Provincia extends BaseBean {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Provincia other = (Provincia) obj;
+        final MuebleMateriales other = (MuebleMateriales) obj;
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
         return true;
     }
+
+    
+      
+     
+    
+    
 }

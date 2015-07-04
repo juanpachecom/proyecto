@@ -9,6 +9,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * 
  * @author Sebastián Salazar Molina <sebasalazar@gmail.com>
  */
+//
 @XmlRootElement
 public class BaseBean implements Serializable {
 
