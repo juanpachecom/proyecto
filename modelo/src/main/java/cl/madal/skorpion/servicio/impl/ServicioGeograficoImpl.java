@@ -6,8 +6,10 @@ import cl.madal.skorpion.repository.ProvinciaRepository;
 import cl.madal.skorpion.repository.RegionRepository;
 import cl.madal.skorpion.servicio.ServicioGeografico;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,16 +79,47 @@ public class ServicioGeograficoImpl implements ServicioGeografico, Serializable 
 
     @Override
     public List<Region> consultarRegiones() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Region> regiones = new ArrayList<Region>();
+        try {
+            regiones = regionRepository.findAll();
+        } catch (Exception e) {
+            regiones = new ArrayList<Region>();
+            logger.error("Error al consultar regiones: {}", e.toString());
+            logger.debug("Error al consultar regiones: {}", e.toString(), e);
+        }
+        return regiones;
     }
 
     @Override
+    @Transactional
     public Region guardar(Region region) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Region resultado = null;
+        try {
+            if (region != null) {
+                resultado = regionRepository.save(region);
+            }
+        } catch (Exception e) {
+            resultado = null;
+            logger.error("Error al guardar region: {}", e.toString());
+            logger.debug("Error al guardar region: {}", e.toString(), e);
+        }
+        return resultado;
     }
 
     @Override
+    @Transactional
     public boolean eliminar(Region region) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean ok = false;
+        try {
+            if (region != null) {
+                regionRepository.delete(region);
+                ok = true;
+            }
+        } catch (Exception e) {
+            ok = false;
+            logger.error("Error al eliminar region: {}", e.toString());
+            logger.debug("Error al eliminar region: {}", e.toString(), e);
+        }
+        return ok;
     }
 }
