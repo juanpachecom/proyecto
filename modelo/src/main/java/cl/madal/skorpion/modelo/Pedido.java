@@ -20,7 +20,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "pedidos")
-public class Pedidos extends BaseBean {
+public class Pedido extends BaseBean {
 
     @Id
     @Column(name = "id")
@@ -82,7 +82,7 @@ public class Pedidos extends BaseBean {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Pedidos other = (Pedidos) obj;
+        final Pedido other = (Pedido) obj;
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
