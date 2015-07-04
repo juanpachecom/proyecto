@@ -55,7 +55,7 @@ public class Mueble extends BaseBean{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 47 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 59 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
 
@@ -74,6 +74,7 @@ public class Mueble extends BaseBean{
         return true;
     }
 
+  
     
     
     

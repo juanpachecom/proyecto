@@ -87,8 +87,8 @@ public class Usuario extends BaseBean{
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 31 * hash + (this.roles != null ? this.roles.hashCode() : 0);
+        int hash = 7;
+        hash = 83 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
 
@@ -106,8 +106,7 @@ public class Usuario extends BaseBean{
         }
         return true;
     }
-      
-      
-    
+
+  
     
 }

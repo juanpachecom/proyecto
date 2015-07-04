@@ -58,8 +58,8 @@ public class MuebleMateriales extends BaseBean{
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 17 * hash + (this.id != null ? this.id.hashCode() : 0);
+        int hash = 3;
+        hash = 37 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
 
@@ -78,6 +78,7 @@ public class MuebleMateriales extends BaseBean{
         return true;
     }
 
+  
     
       
      

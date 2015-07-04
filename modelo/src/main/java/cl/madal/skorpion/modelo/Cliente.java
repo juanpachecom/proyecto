@@ -89,8 +89,8 @@ public class Cliente extends BaseBean {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + (this.id != null ? this.id.hashCode() : 0);
+        int hash = 5;
+        hash = 37 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
 

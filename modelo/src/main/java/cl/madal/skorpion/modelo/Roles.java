@@ -55,7 +55,7 @@ public class Roles extends BaseBean{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + (this.descripcion != null ? this.descripcion.hashCode() : 0);
+        hash = 17 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
 
@@ -73,6 +73,10 @@ public class Roles extends BaseBean{
         }
         return true;
     }
+
+   
+
+
     
     
 }
