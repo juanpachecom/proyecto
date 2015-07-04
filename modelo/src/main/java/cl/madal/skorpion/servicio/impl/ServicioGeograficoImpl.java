@@ -1,5 +1,7 @@
 package cl.madal.skorpion.servicio.impl;
 
+import cl.madal.skorpion.modelo.Comuna;
+import cl.madal.skorpion.modelo.Provincia;
 import cl.madal.skorpion.modelo.Region;
 import cl.madal.skorpion.repository.ComunaRepository;
 import cl.madal.skorpion.repository.ProvinciaRepository;
@@ -33,7 +35,6 @@ public class ServicioGeograficoImpl implements ServicioGeografico, Serializable 
     /*
      * Regiones
      */
-    
     @Override
     public Region consultarRegion(Integer id) {
         Region region = null;
@@ -126,4 +127,169 @@ public class ServicioGeograficoImpl implements ServicioGeografico, Serializable 
         }
         return ok;
     }
+
+    /*
+     * provincias
+     */
+    @Override
+    public Provincia consultarProvincia(Integer id) {
+        Provincia provincia = null;
+        try {
+            if (id != null) {
+                provincia = provinciaRepository.findOne(id);
+            }
+        } catch (Exception e) {
+            provincia = null;
+            logger.error("Error al consultar Provincia: {}", e.toString());
+            logger.debug("Error al consultar Provincia: {}", e.toString(), e);
+        }
+        return provincia;
+    }
+
+    @Override
+    public Provincia consultarProvincia(String nombre, Region region) {
+        Provincia provincia = null;
+        try {
+            if (StringUtils.isNotBlank(nombre) && region != null) {
+                provincia = provinciaRepository.findByNombreIgnoreCaseAndRegion(nombre, region);
+            }
+
+        } catch (Exception e) {
+            provincia = null;
+            logger.error("Error al consultar Provincia: {}", e.toString());
+            logger.debug("Error al consultar Provincia: {}", e.toString(), e);
+        }
+        return provincia;
+    }
+
+   
+    @Override
+    public List<Provincia> consultarProvincias() {
+        List<Provincia> provincia = new ArrayList<Provincia>();
+        try {
+            provincia = provinciaRepository.findAll();
+        } catch (Exception e) {
+            provincia = new ArrayList<Provincia>();
+            logger.error("Error al consultar Provincias: {}", e.toString());
+            logger.debug("Error al consultar Provincias: {}", e.toString(), e);
+        }
+        return provincia;
+    }
+
+    @Override
+    @Transactional
+    public Provincia guardar(Provincia provincia) {
+        Provincia resultado = null;
+        try {
+            if (provincia != null) {
+                resultado = provinciaRepository.save(provincia);
+            }
+        } catch (Exception e) {
+            resultado = null;
+            logger.error("Error al guardar provincia: {}", e.toString());
+            logger.debug("Error al guardar provincia: {}", e.toString(), e);
+        }
+        return resultado;
+    }
+
+    @Override
+    @Transactional
+    public boolean eliminar(Provincia provincia) {
+        boolean ok = false;
+        try {
+            if (provincia != null) {
+                provinciaRepository.delete(provincia);
+                ok = true;
+            }
+        } catch (Exception e) {
+            ok = false;
+            logger.error("Error al eliminar provincia: {}", e.toString());
+            logger.debug("Error al eliminar provincia: {}", e.toString(), e);
+        }
+        return ok;
+    }
+
+    /*
+     * comunas
+     */
+    @Override
+    public Comuna consultarComuna(Integer id) {
+        Comuna comuna = null;
+        try {
+            if (id != null) {
+                comuna = comunaRepository.findOne(id);
+            }
+        } catch (Exception e) {
+            comuna = null;
+            logger.error("Error al consultar comuna: {}", e.toString());
+            logger.debug("Error al consultar comuna: {}", e.toString(), e);
+        }
+        return comuna;
+    }
+
+    @Override
+    public Comuna consultarComuna(String nombre, Provincia provincia) {
+        Comuna comuna = null;
+        try {
+            if (StringUtils.isNotBlank(nombre) && provincia != null) {
+                comuna = comunaRepository.findByNombreIgnoreCaseAndProvincia(nombre, provincia);
+            }
+        } catch (Exception e) {
+            comuna = null;
+            logger.error("Error al consultar Comuna: {}", e.toString());
+            logger.debug("Error al consultar Comuna: {}", e.toString(), e);
+        }
+        return comuna;
+    }
+
+ 
+    @Override
+    public List<Comuna> consultarComuna() {
+        List<Comuna> comunas = new ArrayList<Comuna>();
+        try {
+            comunas = comunaRepository.findAll();
+        } catch (Exception e) {
+            comunas = new ArrayList<Comuna>();
+            logger.error("Error al consultar Provincias: {}", e.toString());
+            logger.debug("Error al consultar Provincias: {}", e.toString(), e);
+        }
+        return comunas;
+    }
+
+    @Override
+    @Transactional
+    public Comuna guardar(Comuna comuna) {
+        Comuna resultado = null;
+        try {
+            if (comuna != null) {
+                resultado = comunaRepository.save(comuna);
+            }
+        } catch (Exception e) {
+            resultado = null;
+            logger.error("Error al guardar comuna: {}", e.toString());
+            logger.debug("Error al guardar comuna: {}", e.toString(), e);
+        }
+        return resultado;
+
+    }
+
+    @Override
+    @Transactional
+    public boolean eliminar(Comuna comuna) {
+        boolean ok = false;
+        try {
+            if (comuna != null) {
+                comunaRepository.delete(comuna);
+                ok = true;
+            }
+        } catch (Exception e) {
+            ok = false;
+            logger.error("Error al eliminar comuna: {}", e.toString());
+            logger.debug("Error al eliminar comuna: {}", e.toString(), e);
+        }
+        return ok;
+    }
+
+   
+
 }

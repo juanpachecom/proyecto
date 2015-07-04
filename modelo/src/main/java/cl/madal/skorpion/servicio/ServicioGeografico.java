@@ -1,6 +1,7 @@
 package cl.madal.skorpion.servicio;
 
 import cl.madal.skorpion.modelo.Provincia;
+import cl.madal.skorpion.modelo.Comuna;
 import cl.madal.skorpion.modelo.Region;
 import java.util.List;
 
@@ -32,11 +33,24 @@ public interface ServicioGeografico {
 
     public Provincia consultarProvincia(String nombre, Region region);
 
-    public List<Provincia> consultarProvincias(Region region);
-
     public List<Provincia> consultarProvincias();
 
     public Provincia guardar(Provincia provincia);
 
     public boolean eliminar(Provincia provincia);
+    /*
+     * Provincias
+     */
+    public Comuna consultarComuna(Integer id);
+
+    public Comuna consultarComuna(String nombre, Provincia provincia);
+
+    public List<Comuna> consultarComuna();
+    
+    public Comuna guardar(Comuna comuna);
+
+    public boolean eliminar(Comuna comuna);
+    
 }
+
+
