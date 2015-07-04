@@ -16,29 +16,30 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "obras")
-public class Obras extends BaseBean{
+public class Obra extends BaseBean {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id = null;
-     @Column(name = "nombre")
+    private Long id = null;
+    @Column(name = "nombre")
     private String nombre = null;
-     @JoinColumn(name = "encargado_id", referencedColumnName = "id")
+    @JoinColumn(name = "encargado_id", referencedColumnName = "id")
     @ManyToOne
-     private Usuario encargado = null;
-     @Column (name = "telefono")
-     private  Integer telefono = null;
-     @Column (name = "direccion")
-     private  String direccion = null;
-      @JoinColumn(name = "comuna_id", referencedColumnName = "id")
+    private Usuario encargado = null;
+    @Column(name = "telefono")
+    private Integer telefono = null;
+    @Column(name = "direccion")
+    private String direccion = null;
+    @JoinColumn(name = "comuna_id", referencedColumnName = "id")
     @ManyToOne
-      private Comuna comuna = null;
+    private Comuna comuna = null;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -97,19 +98,11 @@ public class Obras extends BaseBean{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Obras other = (Obras) obj;
+        final Obra other = (Obra) obj;
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
         return true;
     }
 
-   
-      
-      
-      
-      
-     
-     
-    
 }

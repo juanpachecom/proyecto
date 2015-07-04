@@ -20,33 +20,34 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "pedidos")
-public class Pedidos extends BaseBean{
+public class Pedidos extends BaseBean {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id = null;
-      @JoinColumn(name = "obra_id", referencedColumnName = "id")
+    private Long id = null;
+    @JoinColumn(name = "obra_id", referencedColumnName = "id")
     @ManyToOne
-     private  Obras obra = null;
-       @JoinColumn(name = "mueble_id", referencedColumnName = "id")
+    private Obra obra = null;
+    @JoinColumn(name = "mueble_id", referencedColumnName = "id")
     @ManyToOne
-     private  Mueble mueble = null;
-        @Column(name = "cantidad")
+    private Mueble mueble = null;
+    @Column(name = "cantidad")
     private String cantidad = null;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Obras getObra() {
+    public Obra getObra() {
         return obra;
     }
 
-    public void setObra(Obras obra) {
+    public void setObra(Obra obra) {
         this.obra = obra;
     }
 
@@ -87,13 +88,5 @@ public class Pedidos extends BaseBean{
         }
         return true;
     }
-        
-        
-       
-       
 
-   
-
-    
-    
 }

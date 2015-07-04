@@ -5,11 +5,14 @@
  */
 package cl.madal.skorpion.modelo;
 
+import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -17,22 +20,25 @@ import javax.persistence.Table;
  * @author Juan
  */
 @Entity
-@Table(name = "roles")
-public class Roles extends BaseBean{ 
+@Table(name = "materiales")
+public class Material extends BaseBean {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id = null;
+    private Long id = null;
     @Column(name = "nombre")
     private String nombre = null;
-    @Column(name = "descrpcion")
-    private Integer descripcion = null;
+    @Column(name = "precio_compra")
+    private BigDecimal precioCompra = null;
+    @Column(name = "cantidad")
+    private Integer cantidad = null;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -44,18 +50,26 @@ public class Roles extends BaseBean{
         this.nombre = nombre;
     }
 
-    public Integer getDescripcion() {
-        return descripcion;
+    public BigDecimal getPrecioCompra() {
+        return precioCompra;
     }
 
-    public void setDescripcion(Integer descripcion) {
-        this.descripcion = descripcion;
+    public void setPrecioCompra(BigDecimal precioCompra) {
+        this.precioCompra = precioCompra;
+    }
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 17 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 89 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
 
@@ -67,16 +81,11 @@ public class Roles extends BaseBean{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Roles other = (Roles) obj;
+        final Material other = (Material) obj;
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
         return true;
     }
 
-   
-
-
-    
-    
 }

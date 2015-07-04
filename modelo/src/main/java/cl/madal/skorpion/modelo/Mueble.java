@@ -5,6 +5,7 @@
  */
 package cl.madal.skorpion.modelo;
 
+import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,21 +19,22 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "roles")
-public class Mueble extends BaseBean{
+public class Mueble extends BaseBean {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id = null;
+    private Long id = null;
     @Column(name = "nombre")
     private String nombre = null;
     @Column(name = "precio_venta")
-    private Integer precio_venta = null;
+    private BigDecimal precioVenta = null;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -44,12 +46,12 @@ public class Mueble extends BaseBean{
         this.nombre = nombre;
     }
 
-    public Integer getPrecio_venta() {
-        return precio_venta;
+    public BigDecimal getPrecioVenta() {
+        return precioVenta;
     }
 
-    public void setPrecio_venta(Integer precio_venta) {
-        this.precio_venta = precio_venta;
+    public void setPrecioVenta(BigDecimal precioVenta) {
+        this.precioVenta = precioVenta;
     }
 
     @Override
@@ -74,8 +76,4 @@ public class Mueble extends BaseBean{
         return true;
     }
 
-  
-    
-    
-    
 }

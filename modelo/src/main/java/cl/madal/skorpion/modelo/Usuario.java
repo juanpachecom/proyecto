@@ -20,28 +20,29 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "usuario")
-public class Usuario extends BaseBean{
-     @Id
+public class Usuario extends BaseBean {
+
+    @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id = null;
-     @Column(name = "rut")
+    private Long id = null;
+    @Column(name = "rut")
     private Integer rut = null;
     @Column(name = "nombres")
     private String nombres = null;
     @Column(name = "apellidos")
     private String apellidos = null;
-     @Column(name = "telefono")
+    @Column(name = "telefono")
     private Integer telefono = null;
-      @JoinColumn(name = "rol_id", referencedColumnName = "id")
+    @JoinColumn(name = "rol_id", referencedColumnName = "id")
     @ManyToOne
-     private Roles roles = null;
+    private Rol rol = null;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -77,12 +78,12 @@ public class Usuario extends BaseBean{
         this.telefono = telefono;
     }
 
-    public Roles getRoles() {
-        return roles;
+    public Rol getRol() {
+        return rol;
     }
 
-    public void setRoles(Roles roles) {
-        this.roles = roles;
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
     @Override
@@ -107,6 +108,4 @@ public class Usuario extends BaseBean{
         return true;
     }
 
-  
-    
 }

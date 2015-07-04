@@ -25,10 +25,9 @@ public class Cliente extends BaseBean {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id = null;
+    private Long id = null;
     @Column(name = "rut")
     private Integer rut = null;
-    
     @Column(name = "nombres")
     private String nombres = null;
     @Column(name = "apellidos")
@@ -37,13 +36,13 @@ public class Cliente extends BaseBean {
     private String direccion = null;
     @JoinColumn(name = "comuna_id", referencedColumnName = "id")
     @ManyToOne
-    private Cliente Comuna = null;
+    private Comuna Comuna = null;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -79,11 +78,11 @@ public class Cliente extends BaseBean {
         this.direccion = direccion;
     }
 
-    public Cliente getComuna() {
+    public Comuna getComuna() {
         return Comuna;
     }
 
-    public void setComuna(Cliente Comuna) {
+    public void setComuna(Comuna Comuna) {
         this.Comuna = Comuna;
     }
 
@@ -108,8 +107,5 @@ public class Cliente extends BaseBean {
         }
         return true;
     }
-
-  
-    
 
 }

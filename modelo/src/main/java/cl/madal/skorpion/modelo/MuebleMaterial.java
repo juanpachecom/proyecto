@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cl.madal.skorpion.modelo;
 
 import javax.persistence.Column;
@@ -19,24 +14,25 @@ import javax.persistence.Table;
  * @author Juan
  */
 @Entity
-@Table(name = "mueblemateria")
-public class MuebleMateriales extends BaseBean{
+@Table(name = "muebles_materiales")
+public class MuebleMaterial extends BaseBean {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id = null;
+    private Long id = null;
     @JoinColumn(name = "mueble_id", referencedColumnName = "id")
     @ManyToOne
-     private Mueble mueble = null;
-     @JoinColumn(name = "materiales_id", referencedColumnName = "id")
+    private Mueble mueble = null;
+    @JoinColumn(name = "materiales_id", referencedColumnName = "id")
     @ManyToOne
-     private Materiales materiales = null;
+    private Material material = null;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -48,12 +44,12 @@ public class MuebleMateriales extends BaseBean{
         this.mueble = mueble;
     }
 
-    public Materiales getMateriales() {
-        return materiales;
+    public Material getMaterial() {
+        return material;
     }
 
-    public void setMateriales(Materiales materiales) {
-        this.materiales = materiales;
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
     @Override
@@ -71,17 +67,11 @@ public class MuebleMateriales extends BaseBean{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final MuebleMateriales other = (MuebleMateriales) obj;
+        final MuebleMaterial other = (MuebleMaterial) obj;
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
         return true;
     }
 
-  
-    
-      
-     
-    
-    
 }
