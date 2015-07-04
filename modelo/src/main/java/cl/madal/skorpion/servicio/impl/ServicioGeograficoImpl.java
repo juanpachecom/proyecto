@@ -30,6 +30,10 @@ public class ServicioGeograficoImpl implements ServicioGeografico, Serializable 
     private ComunaRepository comunaRepository;
     public final static Logger logger = LoggerFactory.getLogger(ServicioGeograficoImpl.class);
 
+    /*
+     * Regiones
+     */
+    
     @Override
     public Region consultarRegion(Integer id) {
         Region region = null;
