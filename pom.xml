@@ -22,7 +22,7 @@
         <spring.framework.version>4.1.6.RELEASE</spring.framework.version>
         <spring.security.version>3.2.5.RELEASE</spring.security.version>
         <commons.lang3.version>3.4</commons.lang3.version>
-        <cxf.version>3.0.4</cxf.version>
+        <cxf.version>3.1.1</cxf.version>
         <mysql.jdbc.version>5.1.35</mysql.jdbc.version>
         <hibernate.jpa.version>1.0.0.Final</hibernate.jpa.version>
         <hibernate.version>4.3.10.Final</hibernate.version>

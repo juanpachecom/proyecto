@@ -1,133 +1,163 @@
 START TRANSACTION WITH CONSISTENT SNAPSHOT;
-/*
-SQLyog Ultimate v11.11 (64 bit)
-MySQL - 5.6.20 : Database - proyecto
-*********************************************************************
-*/
 
-/*!40101 SET NAMES utf8 */;
+DROP TABLE IF EXISTS pedidos CASCADE;
+DROP TABLE IF EXISTS obras CASCADE;
+DROP TABLE IF EXISTS usuarios CASCADE;
+DROP TABLE IF EXISTS roles CASCADE;
+DROP TABLE IF EXISTS muebles_materiales;
+DROP TABLE IF EXISTS muebles CASCADE;
+DROP TABLE IF EXISTS materiales CASCADE;
+DROP TABLE IF EXISTS clientes CASCADE;
+DROP TABLE IF EXISTS comunas CASCADE;
+DROP TABLE IF EXISTS provincias CASCADE;
+DROP TABLE IF EXISTS regiones CASCADE;
 
-/*!40101 SET SQL_MODE=''*/;
+--
+-- Name: regiones
+--
+CREATE TABLE regiones (
+    id int NOT NULL AUTO_INCREMENT,
+    nombre varchar(255) NOT NULL,
+    corfo varchar(255) NOT NULL,
+    codigo varchar(5) NOT NULL,
+    numero int NOT NULL,
+    UNIQUE (nombre),
+    UNIQUE (codigo),
+    UNIQUE (numero),
+    PRIMARY KEY (id)
+);
 
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`proyecto` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
 
-USE `proyecto`;
+--
+-- Name: provincias
+--
+CREATE TABLE provincias (
+    id int NOT NULL AUTO_INCREMENT,
+    nombre varchar(255) NOT NULL,
+    region_id int NOT NULL,
+    FOREIGN KEY (region_id) REFERENCES regiones(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    UNIQUE (nombre, region_id),
+    PRIMARY KEY (id)
+);
 
-/*Table structure for table `cliente` */
+--
+-- Name: comunas
+--
+CREATE TABLE comunas (
+    id int NOT NULL AUTO_INCREMENT,
+    nombre varchar(255) NOT NULL,
+    provincia_id int NOT NULL,
+    FOREIGN KEY (provincia_id) REFERENCES provincias(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    UNIQUE (nombre, provincia_id),
+    PRIMARY KEY (id)
+);
 
-DROP TABLE IF EXISTS `cliente`;
 
-CREATE TABLE `cliente` (
-  `rut` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
-  `nombre` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `direccion` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `idRegion` int(2) DEFAULT NULL,
-  `idObra` int(2) DEFAULT NULL,
-  PRIMARY KEY (`rut`),
-  KEY `idObra` (`idObra`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-/*Data for the table `cliente` */
+CREATE TABLE clientes (
+    id bigint NOT NULL AUTO_INCREMENT,
+    rut int NOT NULL,
+    nombres varchar(255),
+    apellidos varchar(255),
+    direccion varchar(255),
+    comuna_id int NOT NULL,
+    FOREIGN KEY (comuna_id) REFERENCES comunas(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    UNIQUE (rut),
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+CREATE INDEX clientes_comunaid_idx ON clientes(comuna_id);
 
-/*Table structure for table `materiales` */
 
-DROP TABLE IF EXISTS `materiales`;
 
-CREATE TABLE `materiales` (
-  `idMateriales` int(2) NOT NULL,
-  `nombre` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `valor` int(6) DEFAULT NULL,
-  `cantidad` int(3) DEFAULT NULL,
-  PRIMARY KEY (`idMateriales`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-/*Data for the table `materiales` */
+CREATE TABLE materiales (
+    id bigint NOT NULL AUTO_INCREMENT,
+    nombre varchar(255),
+    precio_compra numeric,
+    cantidad bigint DEFAULT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
-/*Table structure for table `mueble_materiales` */
 
-DROP TABLE IF EXISTS `mueble_materiales`;
 
-CREATE TABLE `mueble_materiales` (
-  `idMuebles` int(2) NOT NULL,
-  `idMateriales` int(2) NOT NULL,
-  PRIMARY KEY (`idMuebles`,`idMateriales`),
-  KEY `idMateriales` (`idMateriales`),
-  CONSTRAINT `mueble_materiales_ibfk_1` FOREIGN KEY (`idMateriales`) REFERENCES `materiales` (`idMateriales`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-/*Data for the table `mueble_materiales` */
+CREATE TABLE muebles (
+    id bigint NOT NULL AUTO_INCREMENT,
+    nombre varchar(255),
+    precio_venta numeric,
+    UNIQUE(nombre),
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
-/*Table structure for table `muebles` */
 
-DROP TABLE IF EXISTS `muebles`;
 
-CREATE TABLE `muebles` (
-  `idMuebles` int(2) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `valor` int(6) NOT NULL,
-  PRIMARY KEY (`idMuebles`),
-  CONSTRAINT `muebles_ibfk_1` FOREIGN KEY (`idMuebles`) REFERENCES `mueble_materiales` (`idMuebles`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-/*Data for the table `muebles` */
+CREATE TABLE muebles_materiales (
+    id bigint NOT NULL AUTO_INCREMENT,
+    mueble_id bigint NOT NULL,
+    material_id bigint NOT NULL,
+    FOREIGN KEY (mueble_id) REFERENCES muebles(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (material_id) REFERENCES materiales(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    UNIQUE(mueble_id, material_id),
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
-/*Table structure for table `obra` */
 
-DROP TABLE IF EXISTS `obra`;
 
-CREATE TABLE `obra` (
-  `idObra` int(2) NOT NULL,
-  `nombre` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `rutUsuario` varchar(12) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `telefono` int(9) DEFAULT NULL,
-  `idMueble` int(2) DEFAULT NULL,
-  `direccion` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`idObra`),
-  KEY `rutUsuario` (`rutUsuario`),
-  KEY `idMueble` (`idMueble`),
-  CONSTRAINT `obra_ibfk_1` FOREIGN KEY (`idObra`) REFERENCES `cliente` (`idObra`),
-  CONSTRAINT `obra_ibfk_2` FOREIGN KEY (`rutUsuario`) REFERENCES `usuario` (`rutUsuario`),
-  CONSTRAINT `obra_ibfk_3` FOREIGN KEY (`idMueble`) REFERENCES `muebles` (`idMuebles`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-/*Data for the table `obra` */
+CREATE TABLE roles (
+    id int NOT NULL AUTO_INCREMENT,
+    nombre varchar(255) NOT NULL,
+    descripcion text,
+    UNIQUE (nombre),
+    PRIMARY KEY (id)
+);
 
-/*Table structure for table `usuario` */
 
-DROP TABLE IF EXISTS `usuario`;
 
-CREATE TABLE `usuario` (
-  `rutUsuario` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
-  `nombre` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `telefono` int(9) DEFAULT NULL,
-  `tipoUsuario` int(2) DEFAULT NULL,
-  PRIMARY KEY (`rutUsuario`),
-  KEY `tipoUsuario` (`tipoUsuario`),
-  CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`tipoUsuario`) REFERENCES `usuariotipo` (`idTipo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE usuarios (
+    id bigint NOT NULL AUTO_INCREMENT,
+    rut int NOT NULL,
+    nombres varchar(255) NOT NULL,
+    apellidos varchar(255) NOT NULL,
+    telefono bigint,
+    rol_id int NOT NULL,
+    FOREIGN KEY (rol_id) REFERENCES roles(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    UNIQUE (rut),
+    UNIQUE (nombres, apellidos, telefono, rol_id),
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
-/*Data for the table `usuario` */
 
-/*Table structure for table `usuariotipo` */
 
-DROP TABLE IF EXISTS `usuariotipo`;
 
-CREATE TABLE `usuariotipo` (
-  `idTipo` int(2) NOT NULL,
-  `nombre` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`idTipo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-/*Data for the table `usuariotipo` */
+CREATE TABLE obras (
+    id bigint NOT NULL AUTO_INCREMENT,
+    nombre varchar(255) NOT NULL,
+    encargado_id bigint NOT NULL,
+    telefono bigint,
+    direccion varchar(255),
+    comuna_id int NOT NULL,
+    FOREIGN KEY (encargado_id) REFERENCES usuarios(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (comuna_id) REFERENCES comunas(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    UNIQUE (nombre),
+    UNIQUE (nombre, encargado_id, direccion, comuna_id),
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+
+
+CREATE TABLE pedidos (
+    id bigint NOT NULL AUTO_INCREMENT,
+    obra_id bigint NOT NULL,
+    mueble_id bigint NOT NULL,
+    cantidad bigint NOT NULL,
+    FOREIGN KEY (obra_id) REFERENCES obras(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (mueble_id) REFERENCES muebles(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    UNIQUE (obra_id, mueble_id),
+    PRIMARY KEY (id)
+);
 
 COMMIT;
