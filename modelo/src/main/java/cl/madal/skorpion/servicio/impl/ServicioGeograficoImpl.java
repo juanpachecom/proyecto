@@ -8,6 +8,7 @@ import cl.madal.skorpion.servicio.ServicioGeografico;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.Resource;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -44,12 +45,34 @@ public class ServicioGeograficoImpl implements ServicioGeografico, Serializable 
 
     @Override
     public Region consultarRegion(String nombre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Region region = null;
+        try {
+            if (StringUtils.isNotBlank(nombre)) {
+                region = regionRepository.findByNombreIgnoreCase(nombre);
+            }
+        } catch (Exception e) {
+            region = null;
+            logger.error("Error al consultar Region: {}", e.toString());
+            logger.debug("Error al consultar Region: {}", e.toString(), e);
+        }
+        return region;
     }
 
     @Override
     public Region consultarRegionPorNumero(Integer numero) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        Region region = null;
+        try {
+            if (numero != null) {
+                region = regionRepository.findByNumero(numero);
+            }
+        } catch (Exception e) {
+            region = null;
+            logger.error("Error al consultar Region: {}", e.toString());
+            logger.debug("Error al consultar Region: {}", e.toString(), e);
+        }
+        return region;
+
     }
 
     @Override
