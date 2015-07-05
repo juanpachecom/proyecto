@@ -36,7 +36,7 @@ public class ServicioGeograficoImpl implements ServicioGeografico, Serializable 
      * Regiones
      */
     @Override
-    public Region consultarRegion(Integer id) {
+    public Region consultarRegion(Long id) {
         Region region = null;
         try {
             if (id != null) {
@@ -132,7 +132,7 @@ public class ServicioGeograficoImpl implements ServicioGeografico, Serializable 
      * provincias
      */
     @Override
-    public Provincia consultarProvincia(Integer id) {
+    public Provincia consultarProvincia(Long id) {
         Provincia provincia = null;
         try {
             if (id != null) {
@@ -162,7 +162,6 @@ public class ServicioGeograficoImpl implements ServicioGeografico, Serializable 
         return provincia;
     }
 
-   
     @Override
     public List<Provincia> consultarProvincias() {
         List<Provincia> provincia = new ArrayList<Provincia>();
@@ -213,7 +212,7 @@ public class ServicioGeograficoImpl implements ServicioGeografico, Serializable 
      * comunas
      */
     @Override
-    public Comuna consultarComuna(Integer id) {
+    public Comuna consultarComuna(Long id) {
         Comuna comuna = null;
         try {
             if (id != null) {
@@ -242,12 +241,26 @@ public class ServicioGeograficoImpl implements ServicioGeografico, Serializable 
         return comuna;
     }
 
- 
     @Override
-    public List<Comuna> consultarComuna() {
+    public List<Comuna> consultarComunas() {
         List<Comuna> comunas = new ArrayList<Comuna>();
         try {
             comunas = comunaRepository.findAll();
+        } catch (Exception e) {
+            comunas = new ArrayList<Comuna>();
+            logger.error("Error al consultar Provincias: {}", e.toString());
+            logger.debug("Error al consultar Provincias: {}", e.toString(), e);
+        }
+        return comunas;
+    }
+
+    @Override
+    public List<Comuna> consultarComunas(Region region) {
+        List<Comuna> comunas = new ArrayList<Comuna>();
+        try {
+            if (region != null) {
+                comunas = comunaRepository.findByProvinciaRegion(region);
+            }
         } catch (Exception e) {
             comunas = new ArrayList<Comuna>();
             logger.error("Error al consultar Provincias: {}", e.toString());
@@ -289,7 +302,5 @@ public class ServicioGeograficoImpl implements ServicioGeografico, Serializable 
         }
         return ok;
     }
-
-   
 
 }

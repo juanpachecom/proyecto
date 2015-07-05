@@ -9,7 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 /**
  *
  * @author Sebastián Salazar Molina <ssalazar@experti.cl>
@@ -21,17 +20,18 @@ public class Provincia extends BaseBean {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id = null;
+    private Long id = null;
     @Column(name = "nombre")
     private String nombre = null;
     @JoinColumn(name = "region_id", referencedColumnName = "id")
     @ManyToOne
     private Region region = null;
-    public Integer getId() {
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

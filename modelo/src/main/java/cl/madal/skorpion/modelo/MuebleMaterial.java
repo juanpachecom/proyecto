@@ -24,7 +24,7 @@ public class MuebleMaterial extends BaseBean {
     @JoinColumn(name = "mueble_id", referencedColumnName = "id")
     @ManyToOne
     private Mueble mueble = null;
-    @JoinColumn(name = "materiales_id", referencedColumnName = "id")
+    @JoinColumn(name = "material_id", referencedColumnName = "id")
     @ManyToOne
     private Material material = null;
 

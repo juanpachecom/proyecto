@@ -19,7 +19,7 @@ public class Region extends BaseBean {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id = null;
+    private Long id = null;
     @Column(name = "nombre", unique = true)
     private String nombre = null;
     @Column(name = "corfo")
@@ -29,11 +29,11 @@ public class Region extends BaseBean {
     @Column(name = "numero")
     private Integer numero = null;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

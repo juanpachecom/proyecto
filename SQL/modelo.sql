@@ -16,7 +16,7 @@ DROP TABLE IF EXISTS regiones CASCADE;
 -- Name: regiones
 --
 CREATE TABLE regiones (
-    id int NOT NULL AUTO_INCREMENT,
+    id bigint NOT NULL AUTO_INCREMENT,
     nombre varchar(255) NOT NULL,
     corfo varchar(255) NOT NULL,
     codigo varchar(5) NOT NULL,
@@ -32,9 +32,9 @@ CREATE TABLE regiones (
 -- Name: provincias
 --
 CREATE TABLE provincias (
-    id int NOT NULL AUTO_INCREMENT,
+    id bigint NOT NULL AUTO_INCREMENT,
     nombre varchar(255) NOT NULL,
-    region_id int NOT NULL,
+    region_id bigint NOT NULL,
     FOREIGN KEY (region_id) REFERENCES regiones(id) ON UPDATE CASCADE ON DELETE CASCADE,
     UNIQUE (nombre, region_id),
     PRIMARY KEY (id)
@@ -44,9 +44,9 @@ CREATE TABLE provincias (
 -- Name: comunas
 --
 CREATE TABLE comunas (
-    id int NOT NULL AUTO_INCREMENT,
+    id bigint NOT NULL AUTO_INCREMENT,
     nombre varchar(255) NOT NULL,
-    provincia_id int NOT NULL,
+    provincia_id bigint NOT NULL,
     FOREIGN KEY (provincia_id) REFERENCES provincias(id) ON UPDATE CASCADE ON DELETE CASCADE,
     UNIQUE (nombre, provincia_id),
     PRIMARY KEY (id)
@@ -60,7 +60,7 @@ CREATE TABLE clientes (
     nombres varchar(255),
     apellidos varchar(255),
     direccion varchar(255),
-    comuna_id int NOT NULL,
+    comuna_id bigint NOT NULL,
     FOREIGN KEY (comuna_id) REFERENCES comunas(id) ON UPDATE CASCADE ON DELETE CASCADE,
     UNIQUE (rut),
     PRIMARY KEY (id)
@@ -106,7 +106,7 @@ CREATE TABLE muebles_materiales (
 
 
 CREATE TABLE roles (
-    id int NOT NULL AUTO_INCREMENT,
+    id bigint NOT NULL AUTO_INCREMENT,
     nombre varchar(255) NOT NULL,
     descripcion text,
     UNIQUE (nombre),
@@ -121,7 +121,7 @@ CREATE TABLE usuarios (
     nombres varchar(255) NOT NULL,
     apellidos varchar(255) NOT NULL,
     telefono bigint,
-    rol_id int NOT NULL,
+    rol_id bigint NOT NULL,
     FOREIGN KEY (rol_id) REFERENCES roles(id) ON UPDATE CASCADE ON DELETE CASCADE,
     UNIQUE (rut),
     UNIQUE (nombres, apellidos, telefono, rol_id),
@@ -138,7 +138,7 @@ CREATE TABLE obras (
     encargado_id bigint NOT NULL,
     telefono bigint,
     direccion varchar(255),
-    comuna_id int NOT NULL,
+    comuna_id bigint NOT NULL,
     FOREIGN KEY (encargado_id) REFERENCES usuarios(id) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (comuna_id) REFERENCES comunas(id) ON UPDATE CASCADE ON DELETE CASCADE,
     UNIQUE (nombre),

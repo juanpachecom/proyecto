@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cl.madal.skorpion.modelo;
 
 import java.math.BigDecimal;
@@ -11,8 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -32,7 +25,7 @@ public class Material extends BaseBean {
     @Column(name = "precio_compra")
     private BigDecimal precioCompra = null;
     @Column(name = "cantidad")
-    private Integer cantidad = null;
+    private Long cantidad = null;
 
     public Long getId() {
         return id;
@@ -58,11 +51,11 @@ public class Material extends BaseBean {
         this.precioCompra = precioCompra;
     }
 
-    public Integer getCantidad() {
+    public Long getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(Integer cantidad) {
+    public void setCantidad(Long cantidad) {
         this.cantidad = cantidad;
     }
 

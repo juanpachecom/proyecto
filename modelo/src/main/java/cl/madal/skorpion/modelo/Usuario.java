@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cl.madal.skorpion.modelo;
 
 import javax.persistence.Column;
@@ -19,7 +14,7 @@ import javax.persistence.Table;
  * @author Juan
  */
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuarios")
 public class Usuario extends BaseBean {
 
     @Id
@@ -33,7 +28,7 @@ public class Usuario extends BaseBean {
     @Column(name = "apellidos")
     private String apellidos = null;
     @Column(name = "telefono")
-    private Integer telefono = null;
+    private Long telefono = null;
     @JoinColumn(name = "rol_id", referencedColumnName = "id")
     @ManyToOne
     private Rol rol = null;
@@ -70,11 +65,11 @@ public class Usuario extends BaseBean {
         this.apellidos = apellidos;
     }
 
-    public Integer getTelefono() {
+    public Long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(Long telefono) {
         this.telefono = telefono;
     }
 

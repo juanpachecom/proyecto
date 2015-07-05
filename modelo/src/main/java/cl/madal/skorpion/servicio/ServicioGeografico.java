@@ -14,7 +14,7 @@ public interface ServicioGeografico {
     /*
      * Regiones
      */
-    public Region consultarRegion(Integer id);
+    public Region consultarRegion(Long id);
 
     public Region consultarRegion(String nombre);
 
@@ -29,7 +29,7 @@ public interface ServicioGeografico {
     /*
      * Provincias
      */
-    public Provincia consultarProvincia(Integer id);
+    public Provincia consultarProvincia(Long id);
 
     public Provincia consultarProvincia(String nombre, Region region);
 
@@ -38,19 +38,21 @@ public interface ServicioGeografico {
     public Provincia guardar(Provincia provincia);
 
     public boolean eliminar(Provincia provincia);
+    
     /*
-     * Provincias
+     * Comunas
      */
-    public Comuna consultarComuna(Integer id);
+
+    public Comuna consultarComuna(Long id);
 
     public Comuna consultarComuna(String nombre, Provincia provincia);
 
-    public List<Comuna> consultarComuna();
+    public List<Comuna> consultarComunas();
     
+    public List<Comuna> consultarComunas(Region region);
+
     public Comuna guardar(Comuna comuna);
 
     public boolean eliminar(Comuna comuna);
-    
+
 }
-
-

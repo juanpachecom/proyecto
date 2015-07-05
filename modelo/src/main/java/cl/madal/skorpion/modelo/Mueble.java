@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cl.madal.skorpion.modelo;
 
 import java.math.BigDecimal;
@@ -18,7 +13,7 @@ import javax.persistence.Table;
  * @author Juan
  */
 @Entity
-@Table(name = "roles")
+@Table(name = "muebles")
 public class Mueble extends BaseBean {
 
     @Id

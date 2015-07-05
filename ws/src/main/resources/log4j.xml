@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd" >
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+    <appender name="ROOT_APPENDER_SKP" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="DatePattern" value="'.'yyyyMMdd" />
+        <param name="Append" value="true" />
+        <param name="File" value="${path.logs}${file.separator}skorpion${file.separator}ws${file.separator}skorpion.log" />
+        <param name="MaxBackupIndex" value="10"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd/MM/yyyy}; %d{HH:mm:ss}; %p; {%C->%M} %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="ERROR_APPENDER_SKP" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="DatePattern" value="'.'yyyyMMdd" />
+        <param name="Append" value="true" />
+        <param name="File" value="${path.logs}${file.separator}skorpion${file.separator}ws${file.separator}error.log" />
+        <param name="threshold" value="error" />
+        <param name="MaxBackupIndex" value="10"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{dd/MM/yyyy HH:mm:ss,SSS}] {%C->%M} %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="DEBUG_APPENDER_SKP" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="DatePattern" value="'.'yyyyMMdd" />
+        <param name="Append" value="true" /> 
+        <param name="File" value="${path.logs}${file.separator}skorpion${file.separator}ws${file.separator}debug.log" />
+        <param name="threshold" value="debug" />
+        <param name="MaxBackupIndex" value="10"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd/MM/yyyy}; %d{HH:mm:ss}; %p; {%C->%M} %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="INFO_APPENDER_SKP" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="DatePattern" value="'.'yyyyMMdd" />
+        <param name="Append" value="false" />
+        <param name="File" value="${path.logs}${file.separator}skorpion${file.separator}ws${file.separator}info.log" />
+        <param name="MaxBackupIndex" value="10"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd/MM/yyyy}; %d{HH:mm:ss}; %p; %m%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="info" />
+            <param name="LevelMax" value="warn" />
+        </filter>
+    </appender>
+
+    <logger name="cl.madal.skorpion">
+        <level value="DEBUG" />
+        <appender-ref ref="INFO_APPENDER_SKP" />
+        <appender-ref ref="ERROR_APPENDER_SKP" />
+        <appender-ref ref="DEBUG_APPENDER_SKP" />
+    </logger>
+
+
+    <root>
+        <!-- Debería cambiarse por FATAL en producción. -->
+        <level value="INFO" />
+        <appender-ref ref="ROOT_APPENDER_SKP" />
+    </root>
+
+</log4j:configuration>

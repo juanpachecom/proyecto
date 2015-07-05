@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cl.madal.skorpion.modelo;
 
 import javax.persistence.Column;
@@ -23,17 +18,17 @@ public class Rol extends BaseBean {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id = null;
+    private Long id = null;
     @Column(name = "nombre")
     private String nombre = null;
-    @Column(name = "descrpcion")
+    @Column(name = "descripcion", columnDefinition = "text")
     private String descripcion = null;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -20,18 +20,18 @@ public class Comuna extends BaseBean {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id = null;
+    private Long id = null;
     @Column(name = "nombre")
     private String nombre = null;
     @JoinColumn(name = "provincia_id", referencedColumnName = "id")
     @ManyToOne
     private Provincia provincia = null;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
